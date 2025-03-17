@@ -1,54 +1,28 @@
-package com.java.car.model;
+package com.java.car.dto;
 
-import jakarta.persistence.*;
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "car_versions")
-public class CarVersion {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CarVersionDTO {
     private Integer id;
-
-    @ManyToOne
-    @JoinColumn(name = "model_id", nullable = false)
-    private CarModel model;
-
-    @Column(nullable = false, length = 255)
     private String name;
-
-    @Column(nullable = false, precision = 15, scale = 2)
     private BigDecimal price;
-
     private String image;
+    private Integer modelId; // Chỉ lấy ID của CarModel thay vì toàn bộ đối tượng
 
-    // Constructor không tham số
-    public CarVersion() {}
-
-    // Constructor có tham số
-    public CarVersion(Integer id, CarModel model, String name, BigDecimal price, String image) {
+    public CarVersionDTO(Integer id, String name, BigDecimal price, String image, Integer modelId) {
         this.id = id;
-        this.model = model;
         this.name = name;
         this.price = price;
         this.image = image;
+        this.modelId = modelId;
     }
 
-    // Getter và Setter
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public CarModel getModel() {
-        return model;
-    }
-
-    public void setModel(CarModel model) {
-        this.model = model;
     }
 
     public String getName() {
@@ -73,5 +47,13 @@ public class CarVersion {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Integer getModelId() {
+        return modelId;
+    }
+
+    public void setModelId(Integer modelId) {
+        this.modelId = modelId;
     }
 }

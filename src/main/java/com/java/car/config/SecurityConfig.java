@@ -22,7 +22,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Tắt CSRF để dễ test API
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/admin/login", "/api/car-models/**", "/api/car-news/**", "/api/car-parameters/**").permitAll() // Mở API công khai
+                        .requestMatchers("/api/admin/login", "/api/car-models/**", "/api/car-news/**",
+                                "/api/car-parameters/**", "/api/car-versions/**").permitAll() // Mở API công khai
                         .anyRequest().authenticated() // Cần xác thực cho các API khác
                 );
 
