@@ -14,7 +14,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // Tắt CSRF để dễ test API với Postman
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/admin/login", "/api/carmodels/**").permitAll() // Mở quyền truy cập API danh sách xe
+                        .requestMatchers("/api/admin/login", "/api/car-models/**", "/api/car-news/**").permitAll() // Mở quyền truy cập API danh sách xe
                         .anyRequest().authenticated() // Các API khác cần xác thực
                 );
         return http.build();
