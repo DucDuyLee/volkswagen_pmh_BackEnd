@@ -6,21 +6,40 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.cors.CorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Tắt CSRF để dễ test API với Postman
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Bật CORS
+                .csrf(csrf -> csrf.disable()) // Tắt CSRF để dễ test API
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/admin/login", "/api/car-models/**", "/api/car-news/**").permitAll() // Mở quyền truy cập API danh sách xe
-                        .anyRequest().authenticated() // Các API khác cần xác thực
+                        .requestMatchers("/api/admin/login", "/api/car-models/**", "/api/car-news/**").permitAll() // Mở API công khai
+                        .anyRequest().authenticated() // Cần xác thực cho các API khác
                 );
+
         return http.build();
     }
 
-    // Thêm Bean PasswordEncoder để inject vào AdminService
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("http://localhost:5137")); // Cho phép frontend chạy ở cổng 3000
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
