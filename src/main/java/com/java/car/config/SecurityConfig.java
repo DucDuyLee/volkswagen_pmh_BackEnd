@@ -24,7 +24,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/admin/login", "/api/car-models/**", "/api/car-news/**",
                                 "/api/car-parameters/**", "/api/car-versions/**",
-                                "/api/car-model-descriptions/**").permitAll() // Mở API công khai
+                                "/api/car-model-descriptions/**", "/api/car-details/**",
+                                "/api/car-detail-categories/**", "/api/car-detail-descriptions/**").permitAll() // Mở API công khai
                         .anyRequest().authenticated() // Cần xác thực cho các API khác
                 );
 

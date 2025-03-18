@@ -1,20 +1,10 @@
-package com.java.car.model;
+package com.java.car.dto;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "car_details_categories")
-public class CarDetailCategory {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CarDetailCategoryDTO {
     private Integer id;
-
-    @Column(nullable = false, unique = true, length = 255)
     private String categoryName;
 
-    public CarDetailCategory() {}
-
-    public CarDetailCategory(Integer id, String categoryName) {
+    public CarDetailCategoryDTO(Integer id, String categoryName) {
         this.id = id;
         this.categoryName = categoryName;
     }
