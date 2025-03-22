@@ -2,6 +2,8 @@ package com.java.car.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "car_details")
 public class CarDetail {
@@ -23,6 +25,14 @@ public class CarDetail {
     private String image;
 
     public CarDetail() {}
+
+    @OneToMany(mappedBy = "carDetail", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CarDetailDescription> carDetailDescriptions;
+
+    public List<CarDetailDescription> getCarDetailDescriptions() {
+        return carDetailDescriptions;
+    }
+
 
     public CarDetail(Integer id, CarModel model, CarDetailCategory category, String title, String image) {
         this.id = id;

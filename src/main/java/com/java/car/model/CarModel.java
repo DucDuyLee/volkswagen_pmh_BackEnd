@@ -26,6 +26,23 @@ public class CarModel {
     // Constructor không tham số
     public CarModel() {}
 
+    @OneToMany(mappedBy = "model", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<CarDetail> carDetails;
+
+    @OneToMany(mappedBy = "carModel", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<CarParameter> carParameters;
+
+    public List<CarDetail> getCarDetails() {
+        return carDetails;
+    }
+
+    public List<CarParameter> getCarParameters() {
+        return carParameters;
+    }
+
+
     // Constructor đầy đủ tham số
     public CarModel(Integer id, String name, String basePrice, String image, List<CarVersion> versions) {
         this.id = id;
