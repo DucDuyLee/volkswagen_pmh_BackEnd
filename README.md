@@ -65,6 +65,7 @@ Backend hỗ trợ CORS để frontend có thể truy cập từ một cổng kh
 10. API Lấy chi tiết tất cả các xe
 - Lấy chi tiết tất cả các xe: `GET http://localhost:8080/api/cars/all`
 - Lấy chi tiết 5 xe đắt nhất: `GET http://localhost:8080/api/cars/top5-expensive`
+- Lấy chi tiết xe theo id Car_version: `GET http://localhost:8080/api/cars/{id}`
 
  Bảo mật
 Ứng dụng sử dụng `Spring Security` để bảo vệ các API quan trọng. Các API công khai có thể truy cập mà không cần đăng nhập, trong khi các API khác yêu cầu xác thực.

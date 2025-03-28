@@ -26,4 +26,10 @@ public class AllCarController {
     public List<AllCarDTO> getTop5ExpensiveCars() {
         return allCarService.getTop5ExpensiveCars();
     }
+
+    // API lấy thông tin của một xe theo id của car_version
+    @GetMapping("/{carVersionId}")
+    public AllCarDTO getCarByVersionId(@PathVariable Integer carVersionId) {
+        return allCarService.getCarByVersionId(carVersionId);
+    }
 }

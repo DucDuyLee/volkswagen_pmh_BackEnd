@@ -27,6 +27,13 @@ public class AllCarService {
         return mapToAllCarDTOList(top5Cars);
     }
 
+    // Lấy thông tin của một xe theo ID của car_version
+    public AllCarDTO getCarByVersionId(Integer carVersionId) {
+        CarVersion carVersion = carVersionRepository.findById(carVersionId)
+                .orElseThrow(() -> new RuntimeException("Car version not found with id: " + carVersionId));
+        return mapToAllCarDTOList(List.of(carVersion)).get(0);
+    }
+
     // Phương thức chuyển đổi danh sách CarVersion thành List<AllCarDTO>
     private List<AllCarDTO> mapToAllCarDTOList(List<CarVersion> carVersions) {
         return carVersions.stream().map(carVersion -> {
