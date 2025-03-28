@@ -15,8 +15,15 @@ public class AllCarController {
     @Autowired
     private AllCarService allCarService;
 
+    // API lấy tất cả xe
     @GetMapping("/all")
     public List<AllCarDTO> getAllCarData() {
         return allCarService.getAllCarData();
+    }
+
+    // API lấy 5 xe có giá cao nhất
+    @GetMapping("/top5-expensive")
+    public List<AllCarDTO> getTop5ExpensiveCars() {
+        return allCarService.getTop5ExpensiveCars();
     }
 }

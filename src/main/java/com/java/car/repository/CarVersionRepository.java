@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface CarVersionRepository extends JpaRepository<CarVersion, Integer> {
     List<CarVersion> findByModelId(Integer modelId);
+    // Lấy 5 xe có giá cao nhất
+    List<CarVersion> findTop5ByOrderByPriceDesc();
 }
